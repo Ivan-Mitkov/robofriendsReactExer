@@ -4,9 +4,9 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import 'tachyons';
 import { robots } from './robots';
-import Cardlist from './Cardlist';
+import App from './App';
 
 ReactDOM.render(
-<Cardlist robots={robots}/>
+<App/>
 , document.getElementById('root'));
 registerServiceWorker();
