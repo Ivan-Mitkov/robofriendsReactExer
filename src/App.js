@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Cardlist from './Cardlist';
 import SearchBox from './SearchBox';
+import './app.css';
 import { robots } from './robots';
 
 
@@ -25,7 +26,7 @@ class App extends Component {
         });
         return (
             <div className='tc'>
-                <h1>
+                <h1 className='f2' >
                     Robofriends
                 </h1>
                 <SearchBox searchChange={this.onSearchChange}/>
