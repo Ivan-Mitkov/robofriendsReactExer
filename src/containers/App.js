@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Cardlist from './Cardlist';
-import SearchBox from './SearchBox';
-import Scroll from './Scroll';
+import Cardlist from '../components/Cardlist';
+import SearchBox from '../components/SearchBox';
+import Scroll from '../components/Scroll';
 import './app.css';
 
 class App extends Component {
@@ -46,9 +46,7 @@ class App extends Component {
                     <Scroll>
                         <Cardlist robots={filteredRobots} />
                     </Scroll>
-
                 </div>
-
             );
         }
 
