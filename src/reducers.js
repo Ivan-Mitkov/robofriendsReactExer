@@ -1,10 +1,11 @@
 import { CHANGE_SEARCH_FIELD } from './constants'
 
 const initialState = {
-    searchField=''
+    searchField:''
 }
 
 export const searchRobots = (state = initialState, action = {}) => {
+    // console.log(action.type)
     switch (action.type) {
         case CHANGE_SEARCH_FIELD:
         //return new state wich will have everthing in the state {} plus it will update (state)
