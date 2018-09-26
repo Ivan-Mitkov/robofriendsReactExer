@@ -4,39 +4,45 @@ import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import ErrorBoundary from '../components/ErrorBoundary';
 import './app.css';
-import { setSearchField } from '../actions';
+import { setSearchField,requestRobots } from '../actions';
 import { connect } from 'react-redux';
+
 
 
 
 const mapStateToProps = (state) => {
     return {
-        searchField: state.searchField
+        searchField: state.searchRobots.searchField,
+        robots:state.requestRobots.robots,
+        isPending:state.requestRobots.isPending,
+        error:state.requestRobots.error
     }
 }
 //trigger the action, dispatch into reducer
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSearchChange: (event) => dispatch(setSearchField(event.target.value))
+        onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+        onRequestRobots:()=>dispatch(requestRobots())
     }
 }
 class App extends Component {
-    constructor() {
-        super()
-        this.state = {
-            robots: []
-            // searchfield: ''
-        }
-    }
+    // constructor() {
+    //     super()
+    //     this.state = {
+    //         robots: []
+    //         // searchfield: ''
+    //     }
+    // }
     componentDidMount() {
         // console.log(this.props.store.getState());
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => {
-                return response.json();
-            })
-            .then(users => {
-                this.setState({ robots: users })
-            });
+        // fetch('https://jsonplaceholder.typicode.com/users')
+        //     .then(response => {
+        //         return response.json();
+        //     })
+        //     .then(users => {
+        //         this.setState({ robots: users })
+        //     });
+        this.props.onRequestRobots();
 
     }
 
@@ -47,15 +53,16 @@ class App extends Component {
     //     this.setState({ searchfield: event.target.value });
     // }
     render() {
-        const {robots}=this.state;
-        const {searchField,onSearchChange}=this.props;
-        const filteredRobots = robots.filter(robot => {
-            // this.state.searchfield.setState(event.target.value);
-            return robot.name.toLowerCase().includes(searchField.toLowerCase());
-        });
-        if (this.state.robots.length === 0) {
+        // const {robots}=this.state;
+        const {searchField,onSearchChange,robots,isPending}=this.props;
+       
+        if (isPending) {
             return <h1>Loading....</h1>
         } else {
+            const filteredRobots = robots.filter(robot => {
+                // this.state.searchfield.setState(event.target.value);
+                return robot.name.toLowerCase().includes(searchField.toLowerCase());
+            });
             return (
                 <div className='tc'>
                     <h1 className='f2' >
